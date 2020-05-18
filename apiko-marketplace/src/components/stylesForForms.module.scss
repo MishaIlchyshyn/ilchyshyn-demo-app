@@ -1,75 +1,97 @@
 .Form {
-    background: #FFFFFF;
-    box-shadow: 0px 2px 42px rgba(0, 0, 0, 0.111233);
-    border-radius: 7px;
-    width: 375px;
-    margin: 0 auto;
-    margin-top: 50px;
-    padding: 25px 24px 21px 24px;
+  background: #ffffff;
+  box-shadow: 0px 2px 42px rgba(0, 0, 0, 0.111233);
+  border-radius: 7px;
+  width: 375px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 25px 24px 21px 24px;
 }
 
 .titleForm {
-    font-size: 22px;
-    line-height: 25px;
-    color: #282828;
-    text-align: center;
-    padding-bottom: 17px;
+  font-size: 22px;
+  line-height: 25px;
+  color: #282828;
+  text-align: center;
+  padding-bottom: 17px;
 }
 
 .labelAuth {
-    display: block;
-    margin-top: 15px;
-    font-size: 12px;
-    line-height: 14px;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-    color: #303030;
-    display: block;
+  display: block;
+  margin-top: 15px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #303030;
+  display: block;
 }
 
 .inputAuth {
-    width: 100%;
-    background: #F9FAFB;
-    border: 1px solid #DEDEE0;
-    box-sizing: border-box;
-    border-radius: 5px;
-    height: 58px;
-    padding: 0 13px;
-    margin-top: 4px;
-    font-size: 16px;
-    line-height: 18px;
-    letter-spacing: 0.4px;
-    color: rgba(102, 102, 102, 1);
+  width: 100%;
+  background: #f9fafb;
+  border: 1px solid #dedee0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 58px;
+  padding: 0 13px;
+  margin-top: 4px;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+  color: rgba(102, 102, 102, 1);
 }
 
 .inputAuth::placeholder {
-    font-size: 16px;
-    line-height: 18px;
-    letter-spacing: 0.4px;
-    color: rgba(102, 102, 102, 0.466455);
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+  color: rgba(102, 102, 102, 0.466455);
 }
 
 .buttonAuthSubmit {
-    width: 100%;
-    border: 1px solid #DEDEE0;
-    border-radius: 5px;
-    height: 58px;
-    background: #349A89;
-    font-size: 16px;
-    line-height: 18px;
-    text-align: center;
-    letter-spacing: 0.4px;
-    color: #FFFFFF;
-    outline: none;
-    cursor: pointer;
-    margin-top: 37px;
-    transition: 0.5s;
+  width: 100%;
+  border: 1px solid #dedee0;
+  border-radius: 5px;
+  height: 58px;
+  background: #349a89;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  margin-top: 37px;
+  transition: 0.5s;
 }
 
 .buttonAuthSubmit:hover {
-    background: #337d71;
+  background: #337d71;
 }
 
 .invalidFeedback {
-    color: red;
+  color: red;
+}
+
+.RedirectBetweenForms {
+  background: #ffffff;
+  box-shadow: 0px 2px 42px rgba(0, 0, 0, 0.111233);
+  border-radius: 7px;
+  width: 425px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 21px;
+  margin-bottom: 100px;
+  font-size: "14px";
+  line-height: "16px";
+  text-align: "center";
+  letter-spacing: 0.4px;
+  color: #2a2a2a;
+}
+
+.textRedirect {
+  color: #349a89;
+  text-transform: uppercase;
 }

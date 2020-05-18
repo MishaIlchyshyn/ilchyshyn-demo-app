@@ -1,0 +1,40 @@
+.labelAuth {
+  position: relative;
+  display: block;
+  margin-top: 15px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #303030;
+  display: block;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  cursor: pointer;
+}
+
+.inputAuth {
+  width: 100%;
+  background: #f9fafb;
+  border: 1px solid #dedee0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 58px;
+  padding: 0 13px;
+  margin-top: 4px;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+  color: rgba(102, 102, 102, 1);
+}
+
+.inputAuth::placeholder {
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+  color: rgba(102, 102, 102, 0.466455);
+}

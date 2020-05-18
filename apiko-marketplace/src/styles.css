@@ -1,7 +1,8 @@
-
+body {
+  margin: 0;
+}
 
 .root {
-    max-width: 1182px;
-    margin: 0 auto;
-    font-family: Helvetica;
+  margin: 0 auto;
+  font-family: Helvetica;
 }

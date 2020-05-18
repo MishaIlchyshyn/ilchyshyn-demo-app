@@ -1,121 +1,78 @@
-import React from "react";
 import s from "../stylesForForms.module.scss";
-import Api from "../../api/index";
-
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
 import { routes } from "../../scenes/router";
+import { Input } from "../../components";
+import { loginValidate } from "./LoginFormContainer";
+import Header from "../Header/Header";
 
-import RedirectBetweenForms from "../RedirectBetweenForms/RedirectBetweenForms";
+const LoginFormComponent = ({ handleLogin }) => {
+  const [typePassword, setTypePassword] = useState("password");
 
-const redirectToRegister = {
-  text: "I have no account, ",
-  redirect() {
-    return (
-      <Link
-        to={routes.register}
-        style={{
-          color: "#349A89",
-          textDecoration: "none",
-        }}
-      >
-        REGISTER NOW
-      </Link>
-    );
-  },
-};
-
-class LoginFormComponent extends React.Component {
-  redirectToHome = () => {
-    const { history } = this.props;
-    if (history) history.push("/home");
+  const clickIcon = () => {
+    if (typePassword === "password") {
+      setTypePassword("text");
+    } else {
+      setTypePassword("password");
+    }
   };
 
-  render() {
-    return (
-      <div>
-        <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          validationSchema={Yup.object().shape({
-            email: Yup.string()
-              .email("Email is invalid")
-              .required("Email is required"),
-            password: Yup.string()
-              .min(6, "Password must be at least 6 characters")
-              .required("Password is required"),
-          })}
-          onSubmit={(user) => {
-            Api.Auth.login(user).then((result) => {
-              if (result.token) {
-                Api.Auth.setToken(result.token);
-                localStorage.setItem("userData", JSON.stringify(result));
-                this.redirectToHome();
-              }
-            });
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form className={s.Form}>
-              <h1>{this.userFullName}</h1>
-              <h2 className={s.titleForm}>Login</h2>
+  const formik = useFormik(loginValidate);
 
-              <div>
-                <label className={s.labelAuth}>Email</label>
-                <Field
-                  name="email"
-                  type="text"
-                  className={s.inputAuth}
-                  style={
-                    errors.email && touched.email
-                      ? { border: "1px solid red" }
-                      : null
-                  }
-                />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className={s.invalidFeedback}
-                />
-              </div>
-              <div>
-                <label className={s.labelAuth}>Password</label>
-                <Field
-                  name="password"
-                  type="password"
-                  className={s.inputAuth}
-                  style={
-                    errors.password && touched.password
-                      ? { border: "1px solid red" }
-                      : null
-                  }
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className={s.invalidFeedback}
-                />
-              </div>
-              <div>
-                <button type="submit" className={s.buttonAuthSubmit}>
-                  Continue
-                </button>
-              </div>
-            </Form>
-          )}
-        </Formik>
+  return (
+    <div>
+      <Header logo="lightLogo" />
 
-        <RedirectBetweenForms
-          text={redirectToRegister.text}
-          redirect={redirectToRegister.redirect()}
+      <div className={s.Form}>
+        <h2 className={s.titleForm}>Login</h2>
+        <Input
+          className={s.inputAuth}
+          name="email"
+          type="email"
+          placeholder="Example@gmail.com"
+          label="EMAIL"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          onBlur={formik.handleBlur}
         />
+        {formik.touched.email && formik.errors.email ? (
+          <div className={s.invalidFeedback}>{formik.errors.email}</div>
+        ) : null}
+
+        <Input
+          className={s.inputAuth}
+          icon="switchPassword"
+          name="password"
+          type={typePassword}
+          label="PASSWORD"
+          onIconClick={clickIcon}
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.password && formik.errors.password ? (
+          <div className={s.invalidFeedback}>{formik.errors.password}</div>
+        ) : null}
+
+        <button
+          type="button"
+          onClick={() => handleLogin(formik.values)}
+          className={s.buttonAuthSubmit}
+        >
+          Continue
+        </button>
       </div>
-    );
-  }
-}
+
+      <div className={s.RedirectBetweenForms}>
+        <span>I have no account,</span>
+        <Link to={routes.register} style={{ textDecoration: "none" }}>
+          {" "}
+          <span className={s.textRedirect}>Register Now</span>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default LoginFormComponent;
