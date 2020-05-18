@@ -1,0 +1,24 @@
+.blockListProducts {
+  padding-bottom: 92px;
+}
+
+.listProducts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 855px;
+}
+
+.count {
+  font-family: sans-serif;
+  font-size: 20px;
+  color: #000000;
+  text-transform: uppercase;
+  margin: 18px auto;
+  width: 855px;
+}
+
+.countNumber {
+  color: #796b6b;
+}

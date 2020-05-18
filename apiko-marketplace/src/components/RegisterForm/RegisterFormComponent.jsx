@@ -1,163 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "../stylesForForms.module.scss";
-import Api from "../../api/index";
-
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
 import { Link } from "react-router-dom";
-
-import RedirectBetweenForms from "../RedirectBetweenForms/RedirectBetweenForms";
 import { routes } from "../../scenes/router";
+import { Input } from "../../components";
+import { useFormik } from "formik";
+import { registerValidate } from "./RegisterFormContainer";
+import Header from "../Header/Header";
 
-const redirectToLogin = {
-  text: "I already have an account, ",
-  redirect() {
-    return (
-      <Link
-        to={routes.login}
-        style={{
-          color: "#349A89",
-          textDecoration: "none",
-        }}
-      >
-        LOG IN
-      </Link>
-    );
-  },
-};
+const RegisterFormComponent = ({ handleRegister }) => {
+  const [typePassword, setTypePassword] = useState("password");
 
-export class RegisterFormComponent extends React.Component {
-  redirectToHome = () => {
-    const { history } = this.props;
-    if (history) history.push("/home");
+  const clickIcon = () => {
+    if (typePassword === "password") {
+      setTypePassword("text");
+    } else {
+      setTypePassword("password");
+    }
   };
 
-  render() {
-    return (
-      <div>
-        <Formik
-          initialValues={{
-            email: "",
-            fullName: "",
-            password: "",
-            passwordAgain: "",
-          }}
-          validationSchema={Yup.object().shape({
-            email: Yup.string()
-              .email("Email is invalid")
-              .required("Email is required"),
-            fullName: Yup.string().required("Full Name is required"),
-            password: Yup.string()
-              .min(6, "Password must be at least 6 characters")
-              .required("Password is required"),
-            passwordAgain: Yup.string()
-              .oneOf([Yup.ref("password"), null], "Passwords must match")
-              .required("Password Again is required"),
-          })}
-          onSubmit={(user) => {
-            Api.Auth.register(user).then((result) => {
-              if (result.token) {
-                Api.Auth.setToken(result.token);
-                localStorage.setItem("userData", JSON.stringify(result));
-                this.redirectToHome();
-              }
-            });
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form className={s.Form}>
-              <h2 className={s.titleForm}>Register</h2>
+  const formik = useFormik(registerValidate);
 
-              <div className="form-group">
-                <label className={s.labelAuth}>Email</label>
-                <Field
-                  name="email"
-                  type="text"
-                  className={s.inputAuth}
-                  style={
-                    errors.email && touched.email
-                      ? { border: "1px solid red" }
-                      : null
-                  }
-                />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className={s.invalidFeedback}
-                />
-              </div>
-              <div className="form-group">
-                <label className={s.labelAuth}>Full Name</label>
-                <Field
-                  name="fullName"
-                  type="text"
-                  className={s.inputAuth}
-                  style={
-                    errors.fullName && touched.fullName
-                      ? { border: "1px solid red" }
-                      : null
-                  }
-                />
-                <ErrorMessage
-                  name="fullName"
-                  component="div"
-                  className={s.invalidFeedback}
-                />
-              </div>
-              <div className="form-group">
-                <label className={s.labelAuth}>Password</label>
-                <Field
-                  name="password"
-                  type="password"
-                  className={s.inputAuth}
-                  style={
-                    errors.password && touched.password
-                      ? { border: "1px solid red" }
-                      : null
-                  }
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className={s.invalidFeedback}
-                />
-              </div>
-              <div className="form-group">
-                <label className={s.labelAuth}>Password Again</label>
-                <Field
-                  name="passwordAgain"
-                  type="password"
-                  className={s.inputAuth}
-                  style={
-                    errors.passwordAgain && touched.passwordAgain
-                      ? { border: "1px solid red" }
-                      : null
-                  }
-                />
-                <ErrorMessage
-                  name="passwordAgain"
-                  component="div"
-                  className={s.invalidFeedback}
-                />
-              </div>
-              <div className="form-group">
-                <button type="submit" className={s.buttonAuthSubmit}>
-                  Register
-                </button>
-              </div>
-              <div></div>
-            </Form>
-          )}
-        </Formik>
+  return (
+    <div>
+      <Header logo="lightLogo" />
 
-        <RedirectBetweenForms
-          text={redirectToLogin.text}
-          redirect={redirectToLogin.redirect()}
+      <div className={s.Form}>
+        <h2 className={s.titleForm}>Register</h2>
+        <Input
+          className={s.inputAuth}
+          name="email"
+          type="email"
+          placeholder="Example@gmail.com"
+          label="EMAIL"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
         />
+        {formik.touched.email && formik.errors.email ? (
+          <div className={s.invalidFeedback}>{formik.errors.email}</div>
+        ) : null}
+
+        <Input
+          className={s.inputAuth}
+          name="fullName"
+          type="text"
+          placeholder="Tony Stark"
+          label="FULL NAME"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.fullName}
+        />
+        {formik.touched.fullName && formik.errors.fullName ? (
+          <div className={s.invalidFeedback}>{formik.errors.fullName}</div>
+        ) : null}
+
+        <Input
+          className={s.inputAuth}
+          icon="switchPassword"
+          name="password"
+          type={typePassword}
+          label="PASSWORD"
+          onIconClick={clickIcon}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+        />
+        {formik.touched.password && formik.errors.password ? (
+          <div className={s.invalidFeedback}>{formik.errors.password}</div>
+        ) : null}
+
+        <Input
+          className={s.inputAuth}
+          icon="switchPassword"
+          name="passwordAgain"
+          type={typePassword}
+          label="PASSWORD AGAIN"
+          onIconClick={clickIcon}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.passwordAgain}
+        />
+        {formik.touched.passwordAgain && formik.errors.passwordAgain ? (
+          <div className={s.invalidFeedback}>{formik.errors.passwordAgain}</div>
+        ) : null}
+
+        <button
+          type="button"
+          onClick={() => handleRegister(formik.values)}
+          className={s.buttonAuthSubmit}
+        >
+          Register
+        </button>
       </div>
-    );
-  }
-}
+
+      <div className={s.RedirectBetweenForms}>
+        <span>I have no account,</span>
+        <Link to={routes.login} style={{ textDecoration: "none" }}>
+          {" "}
+          <span className={s.textRedirect}>Log In</span>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default RegisterFormComponent;

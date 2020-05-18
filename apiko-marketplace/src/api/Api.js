@@ -1,43 +1,107 @@
+import axios from "axios";
+
+const urls = {
+  login: "/api/auth/login",
+  register: "/api/auth/register",
+  getViewer: "/api/account/user",
+  products: "/api/products/",
+  productsLatest: "/api/products/latest",
+  productsSaved: "/api/products/saved",
+  productDetail: "/api/products/",
+  productSave: "/save",
+  productUnsave: "/unsave",
+};
+
 export const Auth = {
   _token: null,
 
-  setToken(token) {
-    this._token = token;
-    localStorage.setItem("___token", JSON.stringify(token));
+  _storeToken() {
+    try {
+      window.localStorage.setItem("token", JSON.stringify(this._token));
+    } catch (err) {
+      console.log(err);
+    }
   },
 
-  isLoggedIn() {
+  _setTokenToAxios(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${this._token}`;
+  },
+
+  get isLoggedIn() {
     return !!this._token;
   },
 
-  login({ email, password }) {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    };
+  setToken(token) {
+    this._token = token;
 
-    return fetch("/api/auth/login", requestOptions).then((response) =>
-      response.json()
-    );
+    this._storeToken(token);
+
+    this._setTokenToAxios(token);
+  },
+
+  init() {
+    try {
+      const token = window.localStorage.getItem("token");
+      this._token = JSON.parse(token);
+
+      this._setTokenToAxios(token);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  login(body) {
+    return axios.post(urls.login, body);
+  },
+
+  register(body) {
+    return axios.post(urls.register, body);
   },
 
   logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem("___token");
-    localStorage.removeItem("userData");
     this._token = null;
-  },
-
-  register({ email, fullName, password }) {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ email, fullName, password }),
-    };
-
-    return fetch("/api/auth/register", requestOptions).then((response) =>
-      response.json()
-    );
+    try {
+      window.localStorage.removeItem("token");
+    } catch (err) {
+      console.log(err);
+    }
   },
 };
+
+export const Viewer = {
+  get() {
+    return axios.get(urls.getViewer);
+  },
+};
+
+export const Products = {
+  getLatest() {
+    return axios.get(urls.productsLatest);
+  },
+
+  getSaved() {
+    return axios.get(urls.productsSaved, {
+      Authorization: `Bearer ${this._token}`,
+    });
+  },
+
+  saveProduct(id) {
+    return axios.post(urls.products + `${id}` + urls.productSave, {
+      Authorization: `Bearer ${this._token}`,
+    });
+  },
+
+  unsaveProduct(id) {
+    return axios.post(urls.products + `${id}` + urls.productUnsave, {
+      Authorization: `Bearer ${this._token}`,
+    });
+  },
+
+  detailProduct(id) {
+    return axios.get(urls.productDetail + `/${id}`);
+  },
+};
+
+export function init() {
+  Auth.init();
+}
