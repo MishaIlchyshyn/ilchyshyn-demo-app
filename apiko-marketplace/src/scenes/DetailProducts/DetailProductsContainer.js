@@ -6,6 +6,7 @@ import DetailProductsComponent from "./DetailProductsComponent";
 const mapStateToProps = (state) => ({
   item: state.products.detail.items,
   isLoading: state.products.detail.isLoading,
+  owner: state.products.detail.items.owner,
   state,
 });
 

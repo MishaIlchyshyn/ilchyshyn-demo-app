@@ -1,0 +1,41 @@
+.ownerCard {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #dedee0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.topBlock {
+  height: 50px;
+  background: #349a89;
+  border-radius: 4px 4px 0px 0px;
+  position: relative;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  position: absolute;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: 50px;
+}
+
+.fullName {
+  font-size: 15px;
+  line-height: 17px;
+  color: #2b2b2b;
+  display: block;
+  padding-top: 45px;
+  margin: 4px;
+}
+
+.location {
+  font-size: 15px;
+  line-height: 17px;
+  color: rgba(43, 43, 43, 0.499918);
+  display: block;
+  padding-bottom: 13px;
+}
