@@ -32,6 +32,8 @@ const Header = ({ logo, darkTheme, children }) => {
     history.push("/auth/login");
   };
 
+  console.log(history.location.pathname);
+
   const abbreviature = (userName) => {
     return userName
       .split(" ")
@@ -92,6 +94,16 @@ const Header = ({ logo, darkTheme, children }) => {
           >
             Login
           </span>
+        </Link>
+      )}
+
+      {history.location.pathname === "/products/saved" ? (
+        <Link to={routes.saved} className={s.linkToSaved}>
+          <Icon name="linkOutSaved" size="18px" />
+        </Link>
+      ) : (
+        <Link to={routes.saved} className={s.linkToSaved}>
+          <Icon name="linkToSaved" size="18px" />
         </Link>
       )}
 

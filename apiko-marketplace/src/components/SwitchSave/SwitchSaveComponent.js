@@ -11,8 +11,6 @@ const SwitchSaveComponent = ({
   saveProduct,
   unsaveProduct,
 }) => {
-  console.log(state);
-
   return (
     <div>
       {saved ? (
