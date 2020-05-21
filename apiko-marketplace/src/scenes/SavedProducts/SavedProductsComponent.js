@@ -8,7 +8,7 @@ import { routes } from "../router";
 import s from "./SavedProducts.module.scss";
 import SwitchSaveComponent from "../../components/SwitchSave/SwitchSaveComponent";
 
-const SavedProductsComponent = ({ list, isLoading, state }) => {
+const SavedProductsComponent = ({ list, unsaveProduct, isLoading, state }) => {
   const style = {
     background: "linear-gradient(180deg, #090810 0%, #171236 100%)",
     color: "#ffffff",
@@ -30,7 +30,11 @@ const SavedProductsComponent = ({ list, isLoading, state }) => {
           {list.map((item) => {
             return (
               <div key={item.id}>
-                <SwitchSaveComponent saved={item.saved} id={item.id} />
+                <SwitchSaveComponent
+                  saved={item.saved}
+                  id={item.id}
+                  unsaveProduct={unsaveProduct}
+                />
                 <Link
                   key={item.id}
                   to={`${routes.products}/${item.id}`}

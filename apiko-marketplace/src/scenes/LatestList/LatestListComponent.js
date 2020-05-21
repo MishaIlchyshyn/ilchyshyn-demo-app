@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import { routes } from "../router";
 import SwitchSaveComponent from "../../components/SwitchSave/SwitchSaveComponent";
 
-const LatestListComponent = ({ list, isLoading }) => {
+const LatestListComponent = ({
+  list,
+  isLoading,
+  saveProduct,
+  unsaveProduct,
+}) => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -16,7 +21,12 @@ const LatestListComponent = ({ list, isLoading }) => {
         {list.map((item) => {
           return (
             <div key={item.id}>
-              <SwitchSaveComponent saved={item.saved} id={item.id} />
+              <SwitchSaveComponent
+                saved={item.saved}
+                id={item.id}
+                saveProduct={saveProduct}
+                unsaveProduct={unsaveProduct}
+              />
               <Link
                 key={item.id}
                 to={`${routes.products}/${item.id}`}

@@ -60,3 +60,18 @@ export function fetchSave(id) {
     }
   };
 }
+
+export function fetchUnsave(id) {
+  return async function fetchLatestThunck(dispatch) {
+    try {
+      dispatch(actions.fetchUnsave.start());
+
+      const res = await Api.Products.unsaveProduct(id);
+
+      dispatch(actions.fetchUnsave.success(res.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(actions.fetchUnsave.error({ message: err.message }));
+    }
+  };
+}

@@ -3,15 +3,26 @@ import { Icon } from "../../Icon";
 
 import s from "./SwitchSave.module.scss";
 
-const SwitchSaveComponent = ({ saved, id, click, state }) => {
+const SwitchSaveComponent = ({
+  saved,
+  id,
+  click,
+  state,
+  saveProduct,
+  unsaveProduct,
+}) => {
   console.log(state);
 
   return (
-    <div className={s.saved} onClick={() => click(id)}>
+    <div>
       {saved ? (
-        <Icon name="unsaved" size="18px" className={s.icon} />
+        <div className={s.saved} onClick={() => unsaveProduct(id)}>
+          <Icon name="unsaved" size="18px" className={s.icon} />
+        </div>
       ) : (
-        <Icon name="saved" size="18px" className={s.icon} />
+        <div className={s.saved} onClick={() => saveProduct(id)}>
+          <Icon name="saved" size="18px" className={s.icon} />
+        </div>
       )}
     </div>
   );

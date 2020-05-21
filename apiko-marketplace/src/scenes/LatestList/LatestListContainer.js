@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
-import { compose, lifecycle } from "recompose";
+import { compose, lifecycle, withHandlers } from "recompose";
 import { productsOperations } from "../../modules/products";
 import LatestListComponent from "./LatestListComponent";
+import { routes } from "../router";
 
 const mapStateToProps = (state) => ({
   list: state.products.latest.items,
@@ -11,6 +12,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchLatest: productsOperations.fetchLatest,
+  fetchSave: productsOperations.fetchSave,
+  fetchUnsave: productsOperations.fetchUnsave,
 };
 
 const enhancer = compose(
@@ -18,6 +21,16 @@ const enhancer = compose(
   lifecycle({
     componentDidMount() {
       this.props.fetchLatest();
+    },
+  }),
+  withHandlers({
+    saveProduct: (props) => async (id) => {
+      await props.fetchSave(id);
+      props.history.push(routes.saved);
+    },
+    unsaveProduct: (props) => async (id) => {
+      await props.fetchUnsave(id);
+      props.history.push(routes.saved);
     },
   })
 );
