@@ -27,6 +27,8 @@ const Header = ({ logo, darkTheme, children }) => {
   let user = store.getState().viewer.user;
   let history = useHistory();
 
+  console.log(user);
+
   const logout = () => {
     Api.Auth.logout();
     history.push("/auth/login");
@@ -73,7 +75,13 @@ const Header = ({ logo, darkTheme, children }) => {
                 ) : (
                   ""
                 )}
-                <span className={s.profileLink}>Profile</span>
+                {user ? (
+                  <Link to={`${routes.users}/${user.id}/products`}>
+                    <span className={s.profileLink}>Profile</span>
+                  </Link>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <div className={s.edit}>
