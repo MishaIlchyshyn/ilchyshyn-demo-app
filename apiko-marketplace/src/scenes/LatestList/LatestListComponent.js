@@ -10,10 +10,13 @@ const LatestListComponent = ({
   isLoading,
   saveProduct,
   unsaveProduct,
+  state,
 }) => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  console.log(state);
 
   return (
     <div className={s.blockListProducts}>

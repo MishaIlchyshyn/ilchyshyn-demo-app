@@ -20,7 +20,7 @@ const INITIAL_STATE = {
     isError: false,
     error: null,
   },
-  save: {
+  usersProducts: {
     items: [],
     isLoading: false,
     isError: false,
@@ -111,27 +111,27 @@ export default handleActions(
       },
     }),
 
-    [actions.fetchSave.start]: (state) => ({
+    [actions.fetchUsersProducts.start]: (state) => ({
       ...state,
-      save: {
-        ...state.save,
+      usersProducts: {
+        ...state.usersProducts,
         isLoading: true,
         error: null,
         isError: false,
       },
     }),
-    [actions.fetchSave.success]: (state, action) => ({
+    [actions.fetchUsersProducts.success]: (state, action) => ({
       ...state,
-      save: {
-        ...state.save,
+      usersProducts: {
+        ...state.usersProducts,
         isLoading: false,
         items: action.payload,
       },
     }),
-    [actions.fetchSave.error]: (state, action) => ({
+    [actions.fetchUsersProducts.error]: (state, action) => ({
       ...state,
-      save: {
-        ...state.save,
+      usersProducts: {
+        ...state.usersProducts,
         isLoading: false,
         error: action.payload,
         isError: true,

@@ -5,3 +5,6 @@ export const fetchSaved = createAsyncActions("products/FETCH_SAVED");
 export const fetchDetail = createAsyncActions("products/FETCH_DETAIL");
 export const fetchSave = createAsyncActions("products/FETCH_SAVE");
 export const fetchUnsave = createAsyncActions("products/FETCH_UNSAVE");
+export const fetchUsersProducts = createAsyncActions(
+  "products/FETCH_USERS_PRODUCTS"
+);

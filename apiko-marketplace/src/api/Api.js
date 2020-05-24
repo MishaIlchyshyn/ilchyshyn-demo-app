@@ -10,6 +10,8 @@ const urls = {
   productDetail: "/api/products/",
   productSave: "/save",
   productUnsave: "/unsave",
+  productsUsers: "/api/users",
+  getUserById: "/api/users/",
 };
 
 export const Auth = {
@@ -99,6 +101,16 @@ export const Products = {
 
   detailProduct(id) {
     return axios.get(urls.productDetail + `/${id}`);
+  },
+
+  getUsersProducts(id) {
+    return axios.get(urls.productsUsers + `/${id}/products`);
+  },
+};
+
+export const Users = {
+  getUserById(id) {
+    return axios.get(urls.getUserById + `${id}`);
   },
 };
 

@@ -12,8 +12,6 @@ const DetailProductsComponent = ({ item, state, isLoading, owner }) => {
     color: "#ffffff",
   };
 
-  console.log(owner);
-
   return (
     <div>
       <Header logo="darkLogo" darkTheme={style}>
@@ -31,6 +29,7 @@ const DetailProductsComponent = ({ item, state, isLoading, owner }) => {
               avatar={owner.avatar}
               fullName={owner.fullName}
               location={owner.location}
+              id={owner.id}
             />
           ) : (
             "Loading..."

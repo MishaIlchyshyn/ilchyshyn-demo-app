@@ -75,3 +75,18 @@ export function fetchUnsave(id) {
     }
   };
 }
+
+export function fetchUsersProducts(id) {
+  return async function fetchLatestThunck(dispatch) {
+    try {
+      dispatch(actions.fetchUsersProducts.start());
+
+      const res = await Api.Products.getUsersProducts(id);
+
+      dispatch(actions.fetchUsersProducts.success(res.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(actions.fetchUsersProducts.error({ message: err.message }));
+    }
+  };
+}

@@ -18,6 +18,7 @@ const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
+      console.log(this.props.match.params.id);
       this.props.fetchDetail(this.props.match.params.id);
     },
   })

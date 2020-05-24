@@ -32,8 +32,6 @@ const Header = ({ logo, darkTheme, children }) => {
     history.push("/auth/login");
   };
 
-  console.log(history.location.pathname);
-
   const abbreviature = (userName) => {
     return userName
       .split(" ")
