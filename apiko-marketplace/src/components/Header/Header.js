@@ -27,8 +27,6 @@ const Header = ({ logo, darkTheme, children }) => {
   let user = store.getState().viewer.user;
   let history = useHistory();
 
-  console.log(user);
-
   const logout = () => {
     Api.Auth.logout();
     history.push("/auth/login");
@@ -51,6 +49,16 @@ const Header = ({ logo, darkTheme, children }) => {
           <Icon name={logo} size="86px" />
         </Link>
       </div>
+
+      {history.location.pathname === "/add-product" ? (
+        ""
+      ) : (
+        <div>
+          <Link className={s.sell} to={routes.sell}>
+            sell
+          </Link>
+        </div>
+      )}
 
       {Api.Auth.isLoggedIn ? (
         <div className={s.login}>

@@ -4,7 +4,7 @@ const urls = {
   login: "/api/auth/login",
   register: "/api/auth/register",
   getViewer: "/api/account/user",
-  products: "/api/products/",
+  products: "api/products",
   productsLatest: "/api/products/latest",
   productsSaved: "/api/products/saved",
   productDetail: "/api/products/",
@@ -105,6 +105,12 @@ export const Products = {
 
   getUsersProducts(id) {
     return axios.get(urls.productsUsers + `/${id}/products`);
+  },
+
+  createNewProduct(product) {
+    return axios.post(urls.products, product, {
+      Authorization: `Bearer ${this._token}`,
+    });
   },
 };
 

@@ -7,6 +7,7 @@ import SavedProductsContainer from "./SavedProducts/SavedProductsContainer";
 import LoginFormContainer from "../components/LoginForm/LoginFormContainer";
 import RegisterFormContainer from "../components/RegisterForm/RegisterFormContainer";
 import DetailProductsContainer from "./DetailProducts/DetailProductsContainer";
+import AddProductContainer from "./AddProduct/AddProductContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 
 export const routes = {
@@ -18,6 +19,7 @@ export const routes = {
   saved: "/products/saved",
   productsDetail: "/products/:id",
   profile: "/users/:id",
+  sell: "/products",
 };
 
 export default function Router() {
@@ -33,6 +35,7 @@ export default function Router() {
           component={DetailProductsContainer}
         />
         <Route path={routes.profile} component={ProfileContainer} />
+        <Route path={routes.sell} component={AddProductContainer} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

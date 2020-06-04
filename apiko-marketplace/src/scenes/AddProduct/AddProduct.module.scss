@@ -1,0 +1,148 @@
+.Form {
+  background: #ffffff;
+  box-shadow: 0px 2px 42px rgba(0, 0, 0, 0.111233);
+  border-radius: 7px;
+  width: 87%;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 25px 0px 21px 0px;
+}
+
+.titleForm {
+  font-size: 22px;
+  line-height: 25px;
+  color: #282828;
+  text-align: center;
+  padding-bottom: 17px;
+}
+
+.label,
+.labelAddPhotos {
+  display: block;
+  margin-top: 15px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #303030;
+}
+
+.containerInput,
+.addPhotos {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.inputAddProduct {
+  width: 100%;
+  background: #f9fafb;
+  border: 1px solid #dedee0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 58px;
+  padding: 0 13px;
+  margin-top: 4px;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+  color: rgba(102, 102, 102, 1);
+}
+
+.inputAddPhotos {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #f9fafb;
+  border: 1px solid #dedee0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-top: 4px;
+  width: 100%;
+  height: 124px;
+  margin: 0 auto;
+  margin-top: 4px;
+  .addPhotosBtn {
+    background: #e4e4e4;
+    border-radius: 4px;
+    width: 92px;
+    height: 92px;
+    color: #349a89;
+    position: relative;
+  }
+}
+.iconAddPhotos {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.textareaAddProduct {
+  width: 100%;
+  background: #f9fafb;
+  border: 1px solid #dedee0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 0 13px;
+  margin-top: 4px;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+  color: rgba(102, 102, 102, 1);
+}
+
+.inputAddProduct::placeholder {
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+  color: rgba(102, 102, 102, 0.466455);
+}
+
+.photoBlock {
+  width: 92px;
+  height: 92px;
+  margin: 0 11px;
+  position: relative;
+  .removeIcon {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+  .photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+  }
+}
+
+.buttonAddProduct {
+  width: 40%;
+  border: 1px solid #dedee0;
+  border-radius: 5px;
+  height: 48px;
+  background: #349a89;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 18px;
+  display: block;
+  text-align: center;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  margin-top: 37px;
+  transition: 0.5s;
+}
+
+.buttonAddProduct:hover {
+  background: #337d71;
+}
+
+.invalidFeedback {
+  color: red;
+}
+
+.removeButton {
+  cursor: pointer;
+}

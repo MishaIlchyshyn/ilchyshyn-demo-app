@@ -53,6 +53,8 @@ export function fetchSave(id) {
 
       const res = await Api.Products.saveProduct(id);
 
+      console.log(res);
+
       dispatch(actions.fetchSave.success(res.data));
     } catch (err) {
       console.log(err);
@@ -87,6 +89,21 @@ export function fetchUsersProducts(id) {
     } catch (err) {
       console.log(err);
       dispatch(actions.fetchUsersProducts.error({ message: err.message }));
+    }
+  };
+}
+
+export function fetchAddProduct(product) {
+  return async function fetchLatestThunck(dispatch) {
+    try {
+      dispatch(actions.fetchAddProduct.start());
+
+      const res = await Api.Products.createNewProduct(product);
+
+      dispatch(actions.fetchAddProduct.success(res.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(actions.fetchAddProduct.error({ message: err.message }));
     }
   };
 }

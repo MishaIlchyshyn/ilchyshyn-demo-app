@@ -8,3 +8,4 @@ export const fetchUnsave = createAsyncActions("products/FETCH_UNSAVE");
 export const fetchUsersProducts = createAsyncActions(
   "products/FETCH_USERS_PRODUCTS"
 );
+export const fetchAddProduct = createAsyncActions("products/FETCH_ADD_PRODUCT");

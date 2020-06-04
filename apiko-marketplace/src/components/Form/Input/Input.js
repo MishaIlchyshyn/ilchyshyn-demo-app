@@ -13,7 +13,7 @@ function Input({
 }) {
   return (
     <div className={s.container}>
-      <label className={s.labelAuth}>
+      <label className={s.label}>
         {label}
         <input
           name={name}
