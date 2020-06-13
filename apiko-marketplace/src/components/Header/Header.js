@@ -50,7 +50,8 @@ const Header = ({ logo, darkTheme, children }) => {
         </Link>
       </div>
 
-      {history.location.pathname === "/add-product" ? (
+      {history.location.pathname === "/products" ||
+      history.location.pathname === "/edit-profile" ? (
         ""
       ) : (
         <div>
@@ -67,12 +68,12 @@ const Header = ({ logo, darkTheme, children }) => {
             style={{ position: "absolute", right: "0" }}
             onClick={switchProfile}
           >
-            {user ? abbreviature(user.fullName) : ""}
+            {/* {user ? abbreviature(user.fullName) : ""} */}
           </div>
           <div className={s.detail} style={style}>
             <div className={s.profile}>
               <div className={s.profileBadge}>
-                {user ? abbreviature(user.fullName) : ""}
+                {/* {user ? abbreviature(user.fullName) : ""} */}
               </div>
               <div className={s.infoUser}>
                 {user ? (
@@ -84,8 +85,11 @@ const Header = ({ logo, darkTheme, children }) => {
                   ""
                 )}
                 {user ? (
-                  <Link to={`${routes.users}/${user.id}/products`}>
-                    <span className={s.profileLink}>Profile</span>
+                  <Link
+                    to={`${routes.users}/${user.id}/products`}
+                    className={s.profileLink}
+                  >
+                    <span>Profile</span>
                   </Link>
                 ) : (
                   ""
@@ -93,7 +97,9 @@ const Header = ({ logo, darkTheme, children }) => {
               </div>
             </div>
             <div className={s.edit}>
-              <span>Edit Profile</span>
+              <Link to={routes.editProfile} className={s.editProfileLink}>
+                <span>Edit Profile</span>
+              </Link>
             </div>
             <div className={s.logout}>
               <span onClick={logout}>Logout</span>

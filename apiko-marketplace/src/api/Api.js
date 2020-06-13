@@ -12,6 +12,8 @@ const urls = {
   productUnsave: "/unsave",
   productsUsers: "/api/users",
   getUserById: "/api/users/",
+  updateUserAccount: "/api/account/user",
+  uploadImage: "/api/upload/images",
 };
 
 export const Auth = {
@@ -88,13 +90,13 @@ export const Products = {
   },
 
   saveProduct(id) {
-    return axios.post(urls.products + `${id}` + urls.productSave, {
+    return axios.post(urls.productDetail + `${id}` + urls.productSave, {
       Authorization: `Bearer ${this._token}`,
     });
   },
 
   unsaveProduct(id) {
-    return axios.post(urls.products + `${id}` + urls.productUnsave, {
+    return axios.post(urls.productDetail + `${id}` + urls.productUnsave, {
       Authorization: `Bearer ${this._token}`,
     });
   },
@@ -117,6 +119,21 @@ export const Products = {
 export const Users = {
   getUserById(id) {
     return axios.get(urls.getUserById + `${id}`);
+  },
+
+  updateUserAccount(user) {
+    return axios.put(urls.updateUserAccount, user, {
+      Authorization: `Bearer ${this._token}`,
+    });
+  },
+
+  uploadImage(formData) {
+    return axios.post(urls.uploadImage, formData, {
+      Authorization: `Bearer ${this._token}`,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
 };
 

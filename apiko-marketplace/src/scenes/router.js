@@ -9,6 +9,7 @@ import RegisterFormContainer from "../components/RegisterForm/RegisterFormContai
 import DetailProductsContainer from "./DetailProducts/DetailProductsContainer";
 import AddProductContainer from "./AddProduct/AddProductContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
+import EditProfileContainer from "./EditProfile/EditProfileContainer";
 
 export const routes = {
   home: "/",
@@ -20,6 +21,7 @@ export const routes = {
   productsDetail: "/products/:id",
   profile: "/users/:id",
   sell: "/products",
+  editProfile: "/edit-profile",
 };
 
 export default function Router() {
@@ -36,6 +38,7 @@ export default function Router() {
         />
         <Route path={routes.profile} component={ProfileContainer} />
         <Route path={routes.sell} component={AddProductContainer} />
+        <Route path={routes.editProfile} component={EditProfileContainer} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

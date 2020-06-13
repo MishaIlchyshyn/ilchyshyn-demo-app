@@ -3,7 +3,6 @@ import * as actions from "./userActions";
 
 const INITIAL_STATE = {
   user: {
-    user: [],
     isLoading: false,
     isError: false,
     error: null,

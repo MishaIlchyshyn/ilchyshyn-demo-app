@@ -1,5 +1,4 @@
-import { handleActions, combineActions } from "@letapp/redux-actions";
-import * as authActions from "../auth/authActions";
+import { handleActions } from "@letapp/redux-actions";
 import * as actions from "./viewerActions";
 
 const INITIAL_STATE = {
@@ -8,7 +7,6 @@ const INITIAL_STATE = {
     isError: false,
     error: null,
   },
-  user: null,
 };
 
 export default handleActions(
@@ -16,17 +14,12 @@ export default handleActions(
     [actions.fetchViewer.start]: (state) => ({
       ...state,
       fetchViewer: {
-        ...state.fetchViewer,
         isLoading: true,
         error: null,
         isError: false,
       },
     }),
-    [combineActions(
-      actions.fetchViewer.success,
-      authActions.login.success,
-      authActions.register.success
-    )]: (state, action) => ({
+    [actions.fetchViewer.success]: (state, action) => ({
       ...state,
       fetchViewer: {
         ...state.fetchViewer,
@@ -35,6 +28,59 @@ export default handleActions(
       user: action.payload,
     }),
     [actions.fetchViewer.error]: (state, action) => ({
+      ...state,
+      fetchViewer: {
+        ...state.fetchViewer,
+        isLoading: false,
+        error: action.payload,
+        isError: true,
+      },
+    }),
+
+    [actions.fetchUpdateUserAccount.start]: (state) => ({
+      ...state,
+      fetchViewer: {
+        ...state.fetchViewer,
+        isLoading: true,
+        error: null,
+        isError: false,
+      },
+    }),
+    [actions.fetchUpdateUserAccount.success]: (state, action) => ({
+      ...state,
+      fetchViewer: {
+        ...state.fetchViewer,
+        isLoading: false,
+      },
+      user: action.payload,
+    }),
+    [actions.fetchUpdateUserAccount.error]: (state, action) => ({
+      ...state,
+      fetchViewer: {
+        ...state.fetchViewer,
+        isLoading: false,
+        error: action.payload,
+        isError: true,
+      },
+    }),
+
+    [actions.fetchUploadImage.start]: (state) => ({
+      ...state,
+      fetchViewer: {
+        isLoading: true,
+        error: null,
+        isError: false,
+      },
+    }),
+    [actions.fetchUploadImage.success]: (state, action) => ({
+      ...state,
+      fetchViewer: {
+        ...state.fetchViewer,
+        isLoading: false,
+      },
+      avatarUrl: action.payload,
+    }),
+    [actions.fetchUploadImage.error]: (state, action) => ({
       ...state,
       fetchViewer: {
         ...state.fetchViewer,

@@ -6,7 +6,6 @@
 }
 
 .logout {
-  text-decoration: underline;
   cursor: pointer;
   font-size: 18px;
 }
@@ -65,7 +64,6 @@
   }
   .infoUser {
     margin-left: 15px;
-
     .name {
       font-size: 10px;
       color: #000000;
@@ -77,6 +75,7 @@
     .profileLink {
       font-size: 10px;
       color: #349a89;
+      text-decoration: none;
     }
   }
 }
@@ -86,10 +85,13 @@
   font-size: 14px;
   text-transform: uppercase;
   color: #349a89;
-  text-decoration: none;
   cursor: pointer;
   span {
     padding-left: 15px;
+  }
+  .editProfileLink {
+    color: #349a89;
+    text-decoration: none;
   }
 }
 .logout {

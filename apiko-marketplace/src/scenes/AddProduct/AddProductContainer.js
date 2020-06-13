@@ -42,7 +42,6 @@ const enhancer = compose(
   withHandlers({
     handleAddProduct: (props) => async (product) => {
       await props.fetchAddProduct(product);
-      product.title = "";
     },
   })
 );
