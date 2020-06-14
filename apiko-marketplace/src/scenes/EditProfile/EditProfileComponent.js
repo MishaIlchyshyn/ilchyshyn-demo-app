@@ -14,7 +14,7 @@ const EditProfileComponent = ({
   avatarUrl,
   isLoading,
 }) => {
-  console.log(state);
+  console.log(viewer);
 
   const style = {
     background: "linear-gradient(180deg, #090810 0%, #171236 100%)",
@@ -54,7 +54,7 @@ const EditProfileComponent = ({
           ) : (
             <img
               className={s.userAvatar}
-              src={avatarUrl}
+              src={avatarUrl ? avatarUrl : viewer.avatar}
               alt="profile avatar"
             />
           )}

@@ -25,6 +25,7 @@ const Header = ({ logo, darkTheme, children }) => {
   };
 
   let user = store.getState().viewer.user;
+  console.log(user);
   let history = useHistory();
 
   const logout = () => {
@@ -62,49 +63,63 @@ const Header = ({ logo, darkTheme, children }) => {
       )}
 
       {Api.Auth.isLoggedIn ? (
-        <div className={s.login}>
-          <div
-            className={s.profileBadge}
-            style={{ position: "absolute", right: "0" }}
-            onClick={switchProfile}
-          >
-            {/* {user ? abbreviature(user.fullName) : ""} */}
-          </div>
-          <div className={s.detail} style={style}>
-            <div className={s.profile}>
-              <div className={s.profileBadge}>
-                {/* {user ? abbreviature(user.fullName) : ""} */}
+        <div>
+          {user ? (
+            <div className={s.login}>
+              <div
+                className={s.profileBadge}
+                style={{ position: "absolute", right: "0" }}
+                onClick={switchProfile}
+              >
+                {user.avatar ? (
+                  <img src={user.avatar} className={s.headerAvatar} />
+                ) : (
+                  abbreviature(user.fullName)
+                )}
               </div>
-              <div className={s.infoUser}>
-                {user ? (
-                  <div>
-                    <span className={s.name}>{user.fullName}</span>
-                    <span className={s.email}>{user.email}</span>
+              <div className={s.detail} style={style}>
+                <div className={s.profile}>
+                  <div className={s.profileBadge}>
+                    {user.avatar ? (
+                      <img src={user.avatar} className={s.headerAvatar} />
+                    ) : (
+                      abbreviature(user.fullName)
+                    )}
                   </div>
-                ) : (
-                  ""
-                )}
-                {user ? (
-                  <Link
-                    to={`${routes.users}/${user.id}/products`}
-                    className={s.profileLink}
-                  >
-                    <span>Profile</span>
+                  <div className={s.infoUser}>
+                    {user ? (
+                      <div>
+                        <span className={s.name}>{user.fullName}</span>
+                        <span className={s.email}>{user.email}</span>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {user ? (
+                      <Link
+                        to={`${routes.users}/${user.id}/products`}
+                        className={s.profileLink}
+                      >
+                        <span>Profile</span>
+                      </Link>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+                <div className={s.edit}>
+                  <Link to={routes.editProfile} className={s.editProfileLink}>
+                    <span>Edit Profile</span>
                   </Link>
-                ) : (
-                  ""
-                )}
+                </div>
+                <div className={s.logout}>
+                  <span onClick={logout}>Logout</span>
+                </div>
               </div>
             </div>
-            <div className={s.edit}>
-              <Link to={routes.editProfile} className={s.editProfileLink}>
-                <span>Edit Profile</span>
-              </Link>
-            </div>
-            <div className={s.logout}>
-              <span onClick={logout}>Logout</span>
-            </div>
-          </div>
+          ) : (
+            ""
+          )}
         </div>
       ) : (
         <Link to={routes.login} style={{ textDecoration: "none" }}>
