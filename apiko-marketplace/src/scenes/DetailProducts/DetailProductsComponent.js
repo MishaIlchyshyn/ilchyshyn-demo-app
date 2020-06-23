@@ -5,8 +5,15 @@ import s from "./DetailProducts.module.scss";
 import Header from "../../components/Header/Header";
 import DetailCard from "../../components/DetailCard/DetailCard";
 import OwnerCard from "../../components/OwnerCard/OwnerCard";
+import SearchComponent from "../../components/Search/SearchComponent";
 
-const DetailProductsComponent = ({ item, state, isLoading, owner }) => {
+const DetailProductsComponent = ({
+  item,
+  state,
+  isLoading,
+  owner,
+  productsSearch,
+}) => {
   const style = {
     background: "linear-gradient(180deg, #090810 0%, #171236 100%)",
     color: "#ffffff",
@@ -15,7 +22,7 @@ const DetailProductsComponent = ({ item, state, isLoading, owner }) => {
   return (
     <div>
       <Header logo="darkLogo" darkTheme={style}>
-        <div style={{ color: "red", position: "absolute" }}>Filter</div>
+        <SearchComponent productsSearch={productsSearch} />
       </Header>
 
       {isLoading ? <div>Loading...</div> : ""}

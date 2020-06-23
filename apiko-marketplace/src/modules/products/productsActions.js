@@ -9,3 +9,6 @@ export const fetchUsersProducts = createAsyncActions(
   "products/FETCH_USERS_PRODUCTS"
 );
 export const fetchAddProduct = createAsyncActions("products/FETCH_ADD_PRODUCT");
+export const fetchProductsSearch = createAsyncActions(
+  "products/FETCH_PRODUCTS_SEARCH"
+);

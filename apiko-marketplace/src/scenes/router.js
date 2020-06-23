@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Home from "./Home/Home";
 import NotFound from "./NotFound/NotFound";
 import SavedProductsContainer from "./SavedProducts/SavedProductsContainer";
 import LoginFormContainer from "../components/LoginForm/LoginFormContainer";
@@ -10,6 +9,8 @@ import DetailProductsContainer from "./DetailProducts/DetailProductsContainer";
 import AddProductContainer from "./AddProduct/AddProductContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import EditProfileContainer from "./EditProfile/EditProfileContainer";
+import SearchProductsContainer from "./SearchProducts/SearchProductsContainer";
+import HomeContainer from "./Home/HomeContainer";
 
 export const routes = {
   home: "/",
@@ -22,16 +23,21 @@ export const routes = {
   profile: "/users/:id",
   sell: "/products",
   editProfile: "/edit-profile",
+  productsSearch: "/products/search",
 };
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={routes.home} component={Home} />
+        <Route exact path={routes.home} component={HomeContainer} />
         <Route path={routes.login} component={LoginFormContainer} />
         <Route path={routes.register} component={RegisterFormContainer} />
-        <Route exact path={routes.saved} component={SavedProductsContainer} />
+        <Route path={routes.saved} component={SavedProductsContainer} />
+        <Route
+          path={routes.productsSearch}
+          component={SearchProductsContainer}
+        />
         <Route
           path={routes.productsDetail}
           component={DetailProductsContainer}
@@ -39,6 +45,7 @@ export default function Router() {
         <Route path={routes.profile} component={ProfileContainer} />
         <Route path={routes.sell} component={AddProductContainer} />
         <Route path={routes.editProfile} component={EditProfileContainer} />
+
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

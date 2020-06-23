@@ -26,6 +26,12 @@ const INITIAL_STATE = {
     isError: false,
     error: null,
   },
+  searchProducts: {
+    items: [],
+    isLoading: false,
+    isError: false,
+    error: null,
+  },
 };
 
 export default handleActions(
@@ -132,6 +138,33 @@ export default handleActions(
       ...state,
       usersProducts: {
         ...state.usersProducts,
+        isLoading: false,
+        error: action.payload,
+        isError: true,
+      },
+    }),
+
+    [actions.fetchProductsSearch.start]: (state) => ({
+      ...state,
+      searchProducts: {
+        ...state.searchProducts,
+        isLoading: true,
+        error: null,
+        isError: false,
+      },
+    }),
+    [actions.fetchProductsSearch.success]: (state, action) => ({
+      ...state,
+      searchProducts: {
+        ...state.searchProducts,
+        isLoading: false,
+        items: action.payload,
+      },
+    }),
+    [actions.fetchProductsSearch.error]: (state, action) => ({
+      ...state,
+      searchProducts: {
+        ...state.searchProducts,
         isLoading: false,
         error: action.payload,
         isError: true,

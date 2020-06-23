@@ -25,7 +25,6 @@ const Header = ({ logo, darkTheme, children }) => {
   };
 
   let user = store.getState().viewer.user;
-  console.log(user);
   let history = useHistory();
 
   const logout = () => {
@@ -41,106 +40,109 @@ const Header = ({ logo, darkTheme, children }) => {
   };
 
   return (
-    <header
-      className={s.header}
-      style={darkTheme ? { background: darkTheme.background } : null}
-    >
-      <div className={s.logo}>
-        <Link to={routes.home}>
-          <Icon name={logo} size="86px" />
-        </Link>
-      </div>
-
-      {history.location.pathname === "/products" ||
-      history.location.pathname === "/edit-profile" ? (
-        ""
-      ) : (
-        <div>
-          <Link className={s.sell} to={routes.sell}>
-            sell
+    <header style={darkTheme ? { background: darkTheme.background } : null}>
+      <div className={s.header}>
+        <div className={s.logo}>
+          <Link to={routes.home}>
+            <Icon name={logo} size="86px" />
           </Link>
         </div>
-      )}
 
-      {Api.Auth.isLoggedIn ? (
-        <div>
-          {user ? (
-            <div className={s.login}>
-              <div
-                className={s.profileBadge}
-                style={{ position: "absolute", right: "0" }}
-                onClick={switchProfile}
-              >
-                {user.avatar ? (
-                  <img src={user.avatar} className={s.headerAvatar} />
-                ) : (
-                  abbreviature(user.fullName)
-                )}
-              </div>
-              <div className={s.detail} style={style}>
-                <div className={s.profile}>
-                  <div className={s.profileBadge}>
-                    {user.avatar ? (
-                      <img src={user.avatar} className={s.headerAvatar} />
-                    ) : (
-                      abbreviature(user.fullName)
-                    )}
-                  </div>
-                  <div className={s.infoUser}>
-                    {user ? (
-                      <div>
-                        <span className={s.name}>{user.fullName}</span>
-                        <span className={s.email}>{user.email}</span>
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                    {user ? (
-                      <Link
-                        to={`${routes.users}/${user.id}/products`}
-                        className={s.profileLink}
-                      >
-                        <span>Profile</span>
-                      </Link>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-                <div className={s.edit}>
-                  <Link to={routes.editProfile} className={s.editProfileLink}>
-                    <span>Edit Profile</span>
-                  </Link>
-                </div>
-                <div className={s.logout}>
-                  <span onClick={logout}>Logout</span>
-                </div>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-      ) : (
-        <Link to={routes.login} style={{ textDecoration: "none" }}>
-          <span
-            className={s.loginLink}
-            style={darkTheme ? { color: darkTheme.color } : null}
-          >
-            Login
-          </span>
-        </Link>
-      )}
+        {history.location.pathname === "/products" ||
+        history.location.pathname === "/edit-profile" ? (
+          ""
+        ) : (
+          <div>
+            <Link className={s.sell} to={routes.sell}>
+              sell
+            </Link>
+          </div>
+        )}
 
-      {history.location.pathname === "/products/saved" ? (
-        <Link to={routes.saved} className={s.linkToSaved}>
-          <Icon name="linkOutSaved" size="18px" />
-        </Link>
-      ) : (
-        <Link to={routes.saved} className={s.linkToSaved}>
-          <Icon name="linkToSaved" size="18px" />
-        </Link>
-      )}
+        {Api.Auth.isLoggedIn ? (
+          <div>
+            {user ? (
+              <div className={s.login}>
+                <div
+                  className={s.profileBadge}
+                  style={{ position: "absolute", right: "0" }}
+                  onClick={switchProfile}
+                >
+                  {user.avatar ? (
+                    <img src={user.avatar} className={s.headerAvatar} alt="" />
+                  ) : (
+                    abbreviature(user.fullName)
+                  )}
+                </div>
+                <div className={s.detail} style={style}>
+                  <div className={s.profile}>
+                    <div className={s.profileBadge}>
+                      {user.avatar ? (
+                        <img
+                          src={user.avatar}
+                          className={s.headerAvatar}
+                          alt=""
+                        />
+                      ) : (
+                        abbreviature(user.fullName)
+                      )}
+                    </div>
+                    <div className={s.infoUser}>
+                      {user ? (
+                        <div>
+                          <span className={s.name}>{user.fullName}</span>
+                          <span className={s.email}>{user.email}</span>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      {user ? (
+                        <Link
+                          to={`${routes.users}/${user.id}/products`}
+                          className={s.profileLink}
+                        >
+                          <span>Profile</span>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                  <div className={s.edit}>
+                    <Link to={routes.editProfile} className={s.editProfileLink}>
+                      <span>Edit Profile</span>
+                    </Link>
+                  </div>
+                  <div className={s.logout}>
+                    <span onClick={logout}>Logout</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        ) : (
+          <Link to={routes.login} style={{ textDecoration: "none" }}>
+            <span
+              className={s.loginLink}
+              style={darkTheme ? { color: darkTheme.color } : null}
+            >
+              Login
+            </span>
+          </Link>
+        )}
+
+        {history.location.pathname === "/products/saved" ? (
+          <Link to={routes.saved} className={s.linkToSaved}>
+            <Icon name="linkOutSaved" size="18px" />
+          </Link>
+        ) : (
+          <Link to={routes.saved} className={s.linkToSaved}>
+            <Icon name="linkToSaved" size="18px" />
+          </Link>
+        )}
+      </div>
 
       {children}
     </header>

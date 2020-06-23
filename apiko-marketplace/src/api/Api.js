@@ -11,6 +11,7 @@ const urls = {
   productSave: "/save",
   productUnsave: "/unsave",
   productsUsers: "/api/users",
+  productsSearch: "/api/products/search",
   getUserById: "/api/users/",
   updateUserAccount: "/api/account/user",
   uploadImage: "/api/upload/images",
@@ -113,6 +114,10 @@ export const Products = {
     return axios.post(urls.products, product, {
       Authorization: `Bearer ${this._token}`,
     });
+  },
+
+  getProductsSearch(queryParams) {
+    return axios.get(urls.productsSearch + queryParams);
   },
 };
 

@@ -7,8 +7,15 @@ import { routes } from "../router";
 
 import s from "./SavedProducts.module.scss";
 import SwitchSaveComponent from "../../components/SwitchSave/SwitchSaveComponent";
+import SearchComponent from "../../components/Search/SearchComponent";
 
-const SavedProductsComponent = ({ list, unsaveProduct, isLoading, state }) => {
+const SavedProductsComponent = ({
+  list,
+  unsaveProduct,
+  isLoading,
+  state,
+  productsSearch,
+}) => {
   const style = {
     background: "linear-gradient(180deg, #090810 0%, #171236 100%)",
     color: "#ffffff",
@@ -17,7 +24,7 @@ const SavedProductsComponent = ({ list, unsaveProduct, isLoading, state }) => {
   return (
     <div className={s.savedItems}>
       <Header logo="darkLogo" darkTheme={style}>
-        <div style={{ color: "red", position: "absolute" }}>Filter</div>
+        <SearchComponent productsSearch={productsSearch} />
       </Header>
 
       <div className={s.count}>

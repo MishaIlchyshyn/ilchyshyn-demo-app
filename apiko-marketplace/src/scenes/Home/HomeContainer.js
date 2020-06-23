@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import { compose, lifecycle, withHandlers } from "recompose";
+import { compose, withHandlers } from "recompose";
 import { productsOperations } from "../../modules/products";
-import DetailProductsComponent from "./DetailProductsComponent";
+import Home from "./Home";
 
 const getUrl = (searchParams) => {
   let arrValues = [];
@@ -17,25 +17,16 @@ const getUrl = (searchParams) => {
 };
 
 const mapStateToProps = (state) => ({
-  item: state.products.detail.items,
-  isLoading: state.products.detail.isLoading,
-  owner: state.products.detail.items.owner,
   state,
+  searchProducts: state.products.searchProducts.items,
 });
 
 const mapDispatchToProps = {
-  fetchDetail: productsOperations.fetchDetail,
   fetchProductsSearch: productsOperations.fetchProductsSearch,
 };
 
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  lifecycle({
-    componentDidMount() {
-      console.log(this.props.match.params.id);
-      this.props.fetchDetail(this.props.match.params.id);
-    },
-  }),
   withHandlers({
     productsSearch: (props) => async (queryParams) => {
       props.history.push("/products/search" + getUrl(queryParams));
@@ -44,4 +35,4 @@ const enhancer = compose(
   })
 );
 
-export default enhancer(DetailProductsComponent);
+export default enhancer(Home);

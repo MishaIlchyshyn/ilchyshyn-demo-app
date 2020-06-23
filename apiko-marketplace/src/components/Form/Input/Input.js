@@ -12,29 +12,28 @@ function Input({
   ...props
 }) {
   return (
-    <div className={s.container}>
-      <label className={s.label}>
-        {label}
-        <input
-          name={name}
-          label={label}
-          onChange={onChange}
-          value={value}
-          {...props}
-        />
+    <div>
+      {label ? <label className={s.label}>{label}</label> : ""}
 
-        {props.icon ? (
-          <Icon
-            id={name}
-            className={s.icon}
-            name="swichPassword"
-            size="25px"
-            onClick={onIconClick}
-          />
-        ) : (
-          ""
-        )}
-      </label>
+      <input
+        name={name}
+        label={label}
+        onChange={onChange}
+        value={value}
+        {...props}
+      />
+
+      {props.icon ? (
+        <Icon
+          id={name}
+          className={s.icon}
+          name="swichPassword"
+          size="25px"
+          onClick={onIconClick}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

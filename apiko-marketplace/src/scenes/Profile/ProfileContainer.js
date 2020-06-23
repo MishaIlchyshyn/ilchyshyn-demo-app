@@ -5,6 +5,19 @@ import ProfileComponent from "./ProfileComponent";
 import { userOperations } from "../../modules/user";
 import { routes } from "../router";
 
+const getUrl = (searchParams) => {
+  let arrValues = [];
+  for (let value in searchParams) {
+    console.log("value == " + searchParams[value]);
+    if (searchParams[value] !== "") {
+      arrValues.push(value + "=" + searchParams[value]);
+    }
+  }
+
+  let searchUrl = "?" + arrValues.join("&");
+  return searchUrl;
+};
+
 const mapStateToProps = (state) => ({
   isLoading: state.products.detail.isLoading,
   usersProducts: state.products.usersProducts.items,
@@ -17,6 +30,7 @@ const mapDispatchToProps = {
   fetchUserByID: userOperations.fetchUserById,
   fetchSave: productsOperations.fetchSave,
   fetchUnsave: productsOperations.fetchUnsave,
+  fetchProductsSearch: productsOperations.fetchProductsSearch,
 };
 
 const enhancer = compose(
@@ -35,6 +49,10 @@ const enhancer = compose(
     unsaveProduct: (props) => async (id) => {
       await props.fetchUnsave(id);
       props.history.push(routes.saved);
+    },
+    productsSearch: (props) => async (queryParams) => {
+      props.history.push("/products/search" + getUrl(queryParams));
+      await props.fetchProductsSearch(getUrl(queryParams));
     },
   })
 );

@@ -7,6 +7,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import { Link } from "react-router-dom";
 import { routes } from "../router";
 import SwitchSaveComponent from "../../components/SwitchSave/SwitchSaveComponent";
+import SearchComponent from "../../components/Search/SearchComponent";
 
 const ProfileComponent = ({
   state,
@@ -14,6 +15,7 @@ const ProfileComponent = ({
   user,
   saveProduct,
   unsaveProduct,
+  productsSearch,
 }) => {
   console.log(state);
   const style = {
@@ -25,7 +27,7 @@ const ProfileComponent = ({
   return (
     <div>
       <Header logo="darkLogo" darkTheme={style}>
-        <div style={{ color: "red", position: "absolute" }}>Filter</div>
+        <SearchComponent productsSearch={productsSearch} />
       </Header>
 
       <div className={s.profilePage}>

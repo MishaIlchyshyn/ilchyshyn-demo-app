@@ -1,8 +1,12 @@
+header {
+  padding: 15px 0;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding: 15px 70px;
+  padding: 0 70px;
 }
 
 .logout {
@@ -120,8 +124,9 @@
   text-transform: uppercase;
   color: #ffffff;
   position: absolute;
-  right: 170px;
+  right: 198px;
   top: 50%;
+  z-index: 1000;
   padding: 1px 56px;
   transform: translate(0, -50%);
 }

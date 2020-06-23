@@ -107,3 +107,18 @@ export function fetchAddProduct(product) {
     }
   };
 }
+
+export function fetchProductsSearch(queryParams) {
+  return async function fetchLatestThunck(dispatch) {
+    try {
+      dispatch(actions.fetchProductsSearch.start());
+
+      const res = await Api.Products.getProductsSearch(queryParams);
+
+      dispatch(actions.fetchProductsSearch.success(res.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(actions.fetchProductsSearch.error({ message: err.message }));
+    }
+  };
+}

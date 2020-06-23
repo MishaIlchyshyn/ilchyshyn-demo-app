@@ -5,8 +5,9 @@ import { Header } from "../../components";
 import LatestList from "../LatestList/LatestListContainer";
 import { Route } from "react-router-dom";
 import { routes } from "../router";
+import SearchComponent from "../../components/Search/SearchComponent";
 
-const Home = () => {
+const Home = ({ productsSearch }) => {
   const style = {
     background: "linear-gradient(180deg, #090810 0%, #171236 100%)",
     color: "#ffffff",
@@ -15,10 +16,10 @@ const Home = () => {
   return (
     <div className={s.container}>
       <Header logo="darkLogo" darkTheme={style}>
-        <div style={{ color: "red", position: "absolute" }}>Filter</div>
+        <SearchComponent productsSearch={productsSearch} />
       </Header>
 
-      <Route exact path={routes.home} component={LatestList} />
+      <Route path={routes.home} component={LatestList} />
     </div>
   );
 };
