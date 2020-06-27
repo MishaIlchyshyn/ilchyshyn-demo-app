@@ -19,7 +19,8 @@ const getUrl = (searchParams) => {
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.products.detail.isLoading,
+  isLoadingUser: state.user.user.isLoading,
+  isLoadingProducts: state.products.usersProducts.isLoading,
   usersProducts: state.products.usersProducts.items,
   user: state.user.user.user,
   state,

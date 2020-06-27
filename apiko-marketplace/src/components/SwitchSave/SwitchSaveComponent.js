@@ -3,7 +3,14 @@ import { Icon } from "../../Icon";
 
 import s from "./SwitchSave.module.scss";
 
-const SwitchSaveComponent = ({ saved, id, saveProduct, unsaveProduct }) => {
+const SwitchSaveComponent = ({
+  saved,
+  id,
+  saveProduct,
+  unsaveProduct,
+  saveLoading,
+  saveError,
+}) => {
   return (
     <div>
       {saved ? (

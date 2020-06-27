@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { compose, withHandlers } from "recompose";
 import { productsOperations } from "../../modules/products";
 import SearchProductsComponent from "./SearchProductsComponent";
+import { routes } from "../router";
 
 const getUrl = (searchParams) => {
   let arrValues = [];
@@ -19,16 +20,27 @@ const getUrl = (searchParams) => {
 const mapStateToProps = (state) => ({
   searchProducts: state.products.searchProducts.items,
   isLoading: state.products.searchProducts.isLoading,
+
   state,
 });
 
 const mapDispatchToProps = {
   fetchProductsSearch: productsOperations.fetchProductsSearch,
+  fetchSave: productsOperations.fetchSave,
+  fetchUnsave: productsOperations.fetchUnsave,
 };
 
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withHandlers({
+    saveProduct: (props) => async (id) => {
+      await props.fetchSave(id);
+      props.history.push(routes.saved);
+    },
+    unsaveProduct: (props) => async (id) => {
+      await props.fetchUnsave(id);
+      props.history.push(routes.saved);
+    },
     productsSearch: (props) => async (queryParams) => {
       props.history.push("/products/search" + getUrl(queryParams));
       await props.fetchProductsSearch(getUrl(queryParams));

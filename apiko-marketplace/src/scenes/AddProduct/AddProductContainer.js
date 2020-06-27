@@ -14,23 +14,29 @@ export const addProductValidate = {
   validate: (values) => {
     let errors = {};
 
-    // if (!values.title) {
-    //   errors.title = "Required";
-    // }
+    if (!values.title) {
+      errors.title = "Required";
+    }
 
-    // if (!values.price) {
-    //   errors.price = "Required";
-    // }
+    if (!values.location) {
+      errors.location = "Required";
+    }
+
+    if (!values.description) {
+      errors.description = "Required";
+    }
+
+    if (!values.price) {
+      errors.price = "Required";
+    }
 
     return errors;
   },
 };
 
 const mapStateToProps = (state) => ({
-  item: state.products.detail.items,
-  isLoading: state.products.detail.isLoading,
-  owner: state.products.detail.items.owner,
   state,
+  isLoading: state.products.addProduct.isLoading,
 });
 
 const mapDispatchToProps = {
@@ -40,8 +46,9 @@ const mapDispatchToProps = {
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withHandlers({
-    handleAddProduct: (props) => async (product) => {
+    handleAddProduct: (props) => async (product, resetForm) => {
       await props.fetchAddProduct(product);
+      resetForm();
     },
   })
 );

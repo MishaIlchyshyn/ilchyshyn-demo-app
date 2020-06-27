@@ -14,7 +14,7 @@ const EditProfileComponent = ({
   avatarUrl,
   isLoading,
 }) => {
-  console.log(viewer);
+  console.log(state);
 
   const style = {
     background: "linear-gradient(180deg, #090810 0%, #171236 100%)",
@@ -54,7 +54,13 @@ const EditProfileComponent = ({
           ) : (
             <img
               className={s.userAvatar}
-              src={avatarUrl ? avatarUrl : viewer.avatar}
+              src={
+                avatarUrl
+                  ? avatarUrl
+                  : viewer.avatar
+                  ? viewer.avatar
+                  : "https://atlncs.org/wp-content/themes/ancs-sixteen/images/img_headshot.png"
+              }
               alt="profile avatar"
             />
           )}
@@ -111,7 +117,7 @@ const EditProfileComponent = ({
             onClick={() => handleEditProfile(formik.values)}
             className={s.buttonAuthSubmit}
           >
-            Save
+            {isLoading ? "Loading..." : "Save"}
           </button>
         </div>
       </div>

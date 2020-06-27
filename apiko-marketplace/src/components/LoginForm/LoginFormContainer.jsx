@@ -4,6 +4,7 @@ import LoginFormComponent from "./LoginFormComponent";
 import { authOperations } from "../../modules/auth";
 import { routes } from "../../scenes/router";
 import { withRouter } from "react-router-dom";
+import { viewerOperations } from "../../modules/viewer";
 
 export const loginValidate = {
   initialValues: {
@@ -36,6 +37,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   login: authOperations.login,
+  fetchViewer: viewerOperations.fetchViewer,
 };
 
 const enhancer = compose(
@@ -44,6 +46,7 @@ const enhancer = compose(
   withHandlers({
     handleLogin: (props) => async (user) => {
       await props.login(user);
+      props.fetchViewer();
       props.history.push(routes.home);
     },
   })

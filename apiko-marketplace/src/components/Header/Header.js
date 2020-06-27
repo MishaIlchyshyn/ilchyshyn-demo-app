@@ -27,6 +27,8 @@ const Header = ({ logo, darkTheme, children }) => {
   let user = store.getState().viewer.user;
   let history = useHistory();
 
+  let isLoading = store.getState().viewer.fetchViewer.isLoading;
+
   const logout = () => {
     Api.Auth.logout();
     history.push("/auth/login");
@@ -38,6 +40,8 @@ const Header = ({ logo, darkTheme, children }) => {
       .map((word) => word[0].toUpperCase())
       .join("");
   };
+
+  let token = localStorage.getItem("token");
 
   return (
     <header style={darkTheme ? { background: darkTheme.background } : null}>
@@ -53,7 +57,7 @@ const Header = ({ logo, darkTheme, children }) => {
           ""
         ) : (
           <div>
-            <Link className={s.sell} to={routes.sell}>
+            <Link className={s.sell} to={token ? routes.sell : routes.login}>
               sell
             </Link>
           </div>
@@ -63,17 +67,25 @@ const Header = ({ logo, darkTheme, children }) => {
           <div>
             {user ? (
               <div className={s.login}>
-                <div
-                  className={s.profileBadge}
-                  style={{ position: "absolute", right: "0" }}
-                  onClick={switchProfile}
-                >
-                  {user.avatar ? (
-                    <img src={user.avatar} className={s.headerAvatar} alt="" />
-                  ) : (
-                    abbreviature(user.fullName)
-                  )}
-                </div>
+                {isLoading ? (
+                  <div style={{ color: "red" }}>Loading...</div>
+                ) : (
+                  <div
+                    className={s.profileBadge}
+                    style={{ position: "absolute", right: "0" }}
+                    onClick={switchProfile}
+                  >
+                    {user.avatar ? (
+                      <img
+                        src={user.avatar}
+                        className={s.headerAvatar}
+                        alt=""
+                      />
+                    ) : (
+                      abbreviature(user.fullName)
+                    )}
+                  </div>
+                )}
                 <div className={s.detail} style={style}>
                   <div className={s.profile}>
                     <div className={s.profileBadge}>
@@ -137,8 +149,19 @@ const Header = ({ logo, darkTheme, children }) => {
           <Link to={routes.saved} className={s.linkToSaved}>
             <Icon name="linkOutSaved" size="18px" />
           </Link>
+        ) : history.location.pathname === "/auth/login" ||
+          history.location.pathname === "/auth/register" ? (
+          <Link
+            to={token ? routes.saved : routes.login}
+            className={s.linkToSaved}
+          >
+            <Icon name="saved" size="18px" />
+          </Link>
         ) : (
-          <Link to={routes.saved} className={s.linkToSaved}>
+          <Link
+            to={token ? routes.saved : routes.login}
+            className={s.linkToSaved}
+          >
             <Icon name="linkToSaved" size="18px" />
           </Link>
         )}

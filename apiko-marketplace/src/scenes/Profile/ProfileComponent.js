@@ -3,11 +3,9 @@ import React from "react";
 import s from "./Profile.module.scss";
 import Header from "../../components/Header/Header";
 import ProfileUser from "../../components/ProfileUser/ProfileUser";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import { Link } from "react-router-dom";
-import { routes } from "../router";
-import SwitchSaveComponent from "../../components/SwitchSave/SwitchSaveComponent";
 import SearchComponent from "../../components/Search/SearchComponent";
+import ItemProduct from "../../components/ItemProduct/ItemProduct";
+import Footer from "../../components/Footer/Footer";
 
 const ProfileComponent = ({
   state,
@@ -16,6 +14,8 @@ const ProfileComponent = ({
   saveProduct,
   unsaveProduct,
   productsSearch,
+  isLoadingUser,
+  isLoadingProducts,
 }) => {
   console.log(state);
   const style = {
@@ -23,7 +23,7 @@ const ProfileComponent = ({
     color: "#ffffff",
   };
 
-  console.log(usersProducts);
+  console.log(state);
   return (
     <div>
       <Header logo="darkLogo" darkTheme={style}>
@@ -31,54 +31,56 @@ const ProfileComponent = ({
       </Header>
 
       <div className={s.profilePage}>
-        <div className={s.user}>
-          {user ? (
-            <ProfileUser
-              avatar={user.avatar}
-              fullName={user.fullName}
-              location={user.location}
-            />
-          ) : (
-            "Loading..."
-          )}
-        </div>
+        {isLoadingUser ? (
+          <div>Loading...</div>
+        ) : (
+          <div className={s.user}>
+            {user ? (
+              <ProfileUser
+                avatar={user.avatar}
+                fullName={user.fullName}
+                location={user.location}
+              />
+            ) : (
+              "Loading..."
+            )}
+          </div>
+        )}
 
-        <div className={s.counter}>
-          {usersProducts.count}
-          <span className={s.text}>Active listings</span>
-        </div>
+        {isLoadingProducts ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
+            <div className={s.counter}>
+              {usersProducts.count}
+              <span className={s.text}>Active listings</span>
+            </div>
 
-        <div className={s.profileListProducts}>
-          <div className={s.listProducts}>
-            {usersProducts.list
-              ? usersProducts.list.map((item) => {
-                  return (
-                    <div key={item.id}>
-                      <SwitchSaveComponent
-                        saved={item.saved}
-                        id={item.id}
-                        saveProduct={saveProduct}
-                        unsaveProduct={unsaveProduct}
-                      />
-                      <Link
-                        key={item.id}
-                        to={`${routes.products}/${item.id}`}
-                        style={{ textDecoration: "none" }}
-                      >
-                        <ProductCard
+            <div className={s.profileListProducts}>
+              <div className={s.listProducts}>
+                {usersProducts.list
+                  ? usersProducts.list.map((item) => {
+                      return (
+                        <ItemProduct
+                          saved={item.saved}
+                          key={item.id}
                           id={item.id}
+                          saveProduct={saveProduct}
+                          unsaveProduct={unsaveProduct}
                           price={item.price}
                           photos={item.photos}
                           title={item.title}
                         />
-                      </Link>
-                    </div>
-                  );
-                })
-              : "Loading..."}
+                      );
+                    })
+                  : "Loading..."}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
+
+      <Footer />
     </div>
   );
 };

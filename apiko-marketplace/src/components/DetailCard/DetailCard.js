@@ -13,11 +13,25 @@ const DetailCard = ({ item }) => {
     }),
   };
 
+  console.log(item.photos);
+
   return (
     <div className={s.product}>
       <div className={s.productCard}>
         <div className={s.photosContainer}>
-          <img className={s.photos} src={item.photos} alt={item.title} />
+          {item.photos !== undefined && item.photos !== null ? (
+            <img
+              className={s.photos}
+              src={
+                item.photos.length === 0 || item.photos === [""]
+                  ? "https://avtoprigon.in.ua/wp-content/uploads/2017/07/Product-Innovation-Service-icon.jpg"
+                  : item.photos[0]
+              }
+              alt={item.title}
+            />
+          ) : (
+            ""
+          )}
           <div className={s.price}>${item.price}</div>
         </div>
         <div className={s.descriptContainer}>

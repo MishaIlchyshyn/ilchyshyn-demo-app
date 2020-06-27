@@ -8,7 +8,8 @@ import ReactFileReader from "react-file-reader";
 import { v4 as uuidv4 } from "uuid";
 import { Icon } from "../../Icon";
 
-const AddProductComponent = ({ handleAddProduct }) => {
+const AddProductComponent = ({ handleAddProduct, state, isLoading }) => {
+  console.log(state);
   const [loadedFiles, setLoadedFiles] = useState({ items: [] });
 
   const style = {
@@ -35,12 +36,16 @@ const AddProductComponent = ({ handleAddProduct }) => {
     });
   };
 
+  const resetForm = () => {
+    formik.resetForm();
+  };
+
   return (
     <div>
       <Header logo="darkLogo" darkTheme={style}></Header>
 
       <div className={s.addProduct}>
-        <div className={s.Form}>
+        <form className={s.Form}>
           <h2 className={s.titleForm}>Add product</h2>
           <div className={s.containerInput}>
             <Input
@@ -89,6 +94,11 @@ const AddProductComponent = ({ handleAddProduct }) => {
             >
               For example: Iron man suit
             </textarea>
+            {formik.touched.description && formik.errors.description ? (
+              <div className={s.invalidFeedback}>
+                {formik.errors.description}
+              </div>
+            ) : null}
           </div>
 
           <div className={s.addPhotos}>
@@ -141,12 +151,13 @@ const AddProductComponent = ({ handleAddProduct }) => {
 
           <button
             type="button"
-            onClick={() => handleAddProduct(formik.values)}
+            // disabled={!(formik.isValid && formik.dirty)}
+            onClick={() => handleAddProduct(formik.values, resetForm)}
             className={s.buttonAddProduct}
           >
-            SUBMIT
+            {isLoading ? "Loading..." : "SUBMIT"}
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

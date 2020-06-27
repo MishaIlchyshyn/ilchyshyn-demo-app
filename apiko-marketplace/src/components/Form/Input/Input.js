@@ -12,7 +12,7 @@ function Input({
   ...props
 }) {
   return (
-    <div>
+    <div className={s.containInput}>
       {label ? <label className={s.label}>{label}</label> : ""}
 
       <input

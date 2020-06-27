@@ -32,6 +32,16 @@ const INITIAL_STATE = {
     isError: false,
     error: null,
   },
+  addProduct: {
+    isLoading: false,
+    isError: false,
+    error: null,
+  },
+  saveProduct: {
+    isLoading: false,
+    isError: false,
+    error: null,
+  },
 };
 
 export default handleActions(
@@ -165,6 +175,58 @@ export default handleActions(
       ...state,
       searchProducts: {
         ...state.searchProducts,
+        isLoading: false,
+        error: action.payload,
+        isError: true,
+      },
+    }),
+
+    [actions.fetchAddProduct.start]: (state) => ({
+      ...state,
+      addProduct: {
+        ...state.addProduct,
+        isLoading: true,
+        error: null,
+        isError: false,
+      },
+    }),
+    [actions.fetchAddProduct.success]: (state) => ({
+      ...state,
+      addProduct: {
+        ...state.addProduct,
+        isLoading: false,
+      },
+    }),
+    [actions.fetchAddProduct.error]: (state, action) => ({
+      ...state,
+      addProduct: {
+        ...state.addProduct,
+        isLoading: false,
+        error: action.payload,
+        isError: true,
+      },
+    }),
+
+    [actions.fetchSave.start]: (state) => ({
+      ...state,
+      saveProduct: {
+        ...state.saveProduct,
+        isLoading: true,
+        error: null,
+        isError: false,
+      },
+    }),
+    [actions.fetchSave.success]: (state) => ({
+      ...state,
+      saveProduct: {
+        ...state.saveProduct,
+        isLoading: false,
+      },
+    }),
+    [actions.fetchSave.error]: (state, action) => ({
+      ...state,
+      saveProduct: {
+        ...state.saveProduct,
         isLoading: false,
         error: action.payload,
         isError: true,

@@ -7,6 +7,8 @@ import { routes } from "../router";
 const mapStateToProps = (state) => ({
   list: state.products.latest.items,
   isLoading: state.products.latest.isLoading,
+  saveLoading: state.products.saveProduct.isLoading,
+  saveError: state.products.saveProduct.isError,
   state,
 });
 

@@ -63,7 +63,7 @@ const enhancer = compose(
   withHandlers({
     handleRegister: (props) => async (user) => {
       await props.register(user);
-      props.history.push(routes.home);
+      props.history.push(routes.login);
     },
   })
 );

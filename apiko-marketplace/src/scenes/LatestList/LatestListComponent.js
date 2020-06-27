@@ -1,15 +1,14 @@
 import React from "react";
 import s from "./LatestList.module.scss";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import { Link } from "react-router-dom";
-import { routes } from "../router";
-import SwitchSaveComponent from "../../components/SwitchSave/SwitchSaveComponent";
+import ItemProduct from "../../components/ItemProduct/ItemProduct";
 
 const LatestListComponent = ({
   list,
   isLoading,
   saveProduct,
   unsaveProduct,
+  saveLoading,
+  saveError,
   state,
 }) => {
   if (isLoading) {
@@ -23,26 +22,18 @@ const LatestListComponent = ({
       <div className={s.listProducts}>
         {list.map((item) => {
           return (
-            <div key={item.id}>
-              <SwitchSaveComponent
-                saved={item.saved}
-                id={item.id}
-                saveProduct={saveProduct}
-                unsaveProduct={unsaveProduct}
-              />
-              <Link
-                key={item.id}
-                to={`${routes.products}/${item.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <ProductCard
-                  id={item.id}
-                  price={item.price}
-                  photos={item.photos}
-                  title={item.title}
-                />
-              </Link>
-            </div>
+            <ItemProduct
+              saved={item.saved}
+              key={item.id}
+              id={item.id}
+              saveProduct={saveProduct}
+              unsaveProduct={unsaveProduct}
+              price={item.price}
+              photos={item.photos}
+              title={item.title}
+              saveLoading={saveLoading}
+              saveError={saveError}
+            />
           );
         })}
       </div>

@@ -18,7 +18,6 @@
   top: 50%;
   right: 10px;
   cursor: pointer;
-  transform: translate(0, -50%);
 }
 
 .inputAuth {
@@ -41,4 +40,8 @@
   line-height: 18px;
   letter-spacing: 0.4px;
   color: rgba(102, 102, 102, 0.466455);
+}
+
+.containInput {
+  position: relative;
 }
