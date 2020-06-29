@@ -3,17 +3,17 @@ import axios from "axios";
 const urls = {
   login: "/api/auth/login",
   register: "/api/auth/register",
-  getViewer: "/api/account/user",
+  getViewer: "/api/account",
   products: "api/products",
-  productsLatest: "/api/products/latest",
+  productsLatest: "api/products/latest",
   productsSaved: "/api/products/saved",
   productDetail: "/api/products/",
-  productSave: "/save",
-  productUnsave: "/unsave",
+  productSave: "/saved",
+  productUnsave: "/saved",
   productsUsers: "/api/users",
   productsSearch: "/api/products/search",
   getUserById: "/api/users/",
-  updateUserAccount: "/api/account/user",
+  updateUserAccount: "/api/account",
   uploadImage: "/api/upload/images",
 };
 
@@ -97,7 +97,7 @@ export const Products = {
   },
 
   unsaveProduct(id) {
-    return axios.post(urls.productDetail + `${id}` + urls.productUnsave, {
+    return axios.delete(urls.productDetail + `${id}` + urls.productUnsave, {
       Authorization: `Bearer ${this._token}`,
     });
   },
