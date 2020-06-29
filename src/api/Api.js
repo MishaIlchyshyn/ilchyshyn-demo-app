@@ -97,7 +97,7 @@ export const Products = {
   },
 
   unsaveProduct(id) {
-    return axios.post(urls.productDetail + `${id}` + urls.productUnsave, {
+    return axios.delete(urls.productDetail + `${id}` + urls.productUnsave, {
       Authorization: `Bearer ${this._token}`,
     });
   },
