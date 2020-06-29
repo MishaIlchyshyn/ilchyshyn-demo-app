@@ -1,7 +1,7 @@
 const createProxy = require("http-proxy-middleware");
 
 const proxy = createProxy({
-  target: "https://apiko-intensive-backend.herokuapp.com/",
+  target: "https://apiko-marketplace-api-2019.herokuapp.com/",
   pathRewrite: {
     "^/api": "",
   },
