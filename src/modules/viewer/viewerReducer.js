@@ -37,6 +37,32 @@ export default handleActions(
       },
     }),
 
+    [actions.viewerLogout.start]: (state) => ({
+      ...state,
+      fetchViewer: {
+        isLoading: true,
+        error: null,
+        isError: false,
+      },
+    }),
+    [actions.viewerLogout.success]: (state, action) => ({
+      ...state,
+      fetchViewer: {
+        ...state.fetchViewer,
+        isLoading: false,
+      },
+      user: "",
+    }),
+    [actions.viewerLogout.error]: (state, action) => ({
+      ...state,
+      fetchViewer: {
+        ...state.fetchViewer,
+        isLoading: false,
+        error: action.payload,
+        isError: true,
+      },
+    }),
+
     [actions.fetchUpdateUserAccount.start]: (state) => ({
       ...state,
       fetchViewer: {

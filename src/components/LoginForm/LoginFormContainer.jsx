@@ -31,6 +31,7 @@ export const loginValidate = {
 
 function mapStateToProps(state) {
   return {
+    state,
     isLoading: state.auth.login.isLoading,
   };
 }

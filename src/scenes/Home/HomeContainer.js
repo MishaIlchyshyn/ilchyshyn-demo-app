@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { compose, withHandlers } from "recompose";
 import { productsOperations } from "../../modules/products";
 import Home from "./Home";
+import { viewerOperations } from "../../modules/viewer";
 
 const getUrl = (searchParams) => {
   let arrValues = [];
@@ -23,6 +24,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchProductsSearch: productsOperations.fetchProductsSearch,
+  viewerLogout: viewerOperations.viewerLogout,
 };
 
 const enhancer = compose(
@@ -31,6 +33,10 @@ const enhancer = compose(
     productsSearch: (props) => async (queryParams) => {
       props.history.push("/products/search" + getUrl(queryParams));
       await props.fetchProductsSearch(getUrl(queryParams));
+    },
+    test: (props) => async () => {
+      props.viewerLogout();
+      console.log("test");
     },
   })
 );

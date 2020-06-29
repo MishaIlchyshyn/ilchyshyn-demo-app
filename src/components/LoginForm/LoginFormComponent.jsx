@@ -8,8 +8,10 @@ import { loginValidate } from "./LoginFormContainer";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-const LoginFormComponent = ({ handleLogin, isLoading }) => {
+const LoginFormComponent = ({ handleLogin, isLoading, state }) => {
   const [typePassword, setTypePassword] = useState("password");
+
+  console.log(state);
 
   const clickIcon = () => {
     if (typePassword === "password") {

@@ -7,7 +7,7 @@ import { routes } from "../../scenes/router";
 import store from "../../store/createStore";
 import { Icon } from "../../Icon";
 
-const Header = ({ logo, darkTheme, children }) => {
+const Header = ({ logo, darkTheme, children, test }) => {
   const [style, setStyle] = useState({
     display: "none",
   });
@@ -24,6 +24,8 @@ const Header = ({ logo, darkTheme, children }) => {
     }
   };
 
+  let isLoggedIn = Api.Auth.isLoggedIn;
+
   let user = store.getState().viewer.user;
   let history = useHistory();
 
@@ -32,6 +34,7 @@ const Header = ({ logo, darkTheme, children }) => {
   const logout = () => {
     Api.Auth.logout();
     history.push("/auth/login");
+    test();
   };
 
   const abbreviature = (userName) => {
@@ -40,8 +43,6 @@ const Header = ({ logo, darkTheme, children }) => {
       .map((word) => word[0].toUpperCase())
       .join("");
   };
-
-  let token = localStorage.getItem("token");
 
   return (
     <header style={darkTheme ? { background: darkTheme.background } : null}>
@@ -57,18 +58,18 @@ const Header = ({ logo, darkTheme, children }) => {
           ""
         ) : (
           <div>
-            <Link className={s.sell} to={token ? routes.sell : routes.login}>
+            <Link className={s.sell} to={user ? routes.sell : routes.login}>
               sell
             </Link>
           </div>
         )}
 
-        {Api.Auth.isLoggedIn ? (
+        {isLoggedIn ? (
           <div>
             {user ? (
               <div className={s.login}>
                 {isLoading ? (
-                  <div style={{ color: "red" }}>Loading...</div>
+                  <div className={s.isLoading}>Loading...</div>
                 ) : (
                   <div
                     className={s.profileBadge}
@@ -130,8 +131,17 @@ const Header = ({ logo, darkTheme, children }) => {
                   </div>
                 </div>
               </div>
+            ) : isLoading ? (
+              <div className={s.isLoading}>Loading...</div>
             ) : (
-              ""
+              <Link to={routes.login} style={{ textDecoration: "none" }}>
+                <span
+                  className={s.loginLink}
+                  style={darkTheme ? { color: darkTheme.color } : null}
+                >
+                  Login
+                </span>
+              </Link>
             )}
           </div>
         ) : (
@@ -152,14 +162,14 @@ const Header = ({ logo, darkTheme, children }) => {
         ) : history.location.pathname === "/auth/login" ||
           history.location.pathname === "/auth/register" ? (
           <Link
-            to={token ? routes.saved : routes.login}
+            to={user ? routes.saved : routes.login}
             className={s.linkToSaved}
           >
             <Icon name="saved" size="18px" />
           </Link>
         ) : (
           <Link
-            to={token ? routes.saved : routes.login}
+            to={user ? routes.saved : routes.login}
             className={s.linkToSaved}
           >
             <Icon name="linkToSaved" size="18px" />

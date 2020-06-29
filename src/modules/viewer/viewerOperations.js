@@ -47,3 +47,16 @@ export function fetchUpdateUserAccount(user) {
     }
   };
 }
+
+export function viewerLogout() {
+  return async function fetchLatestThunck(dispatch) {
+    try {
+      dispatch(actions.viewerLogout.start());
+
+      dispatch(actions.viewerLogout.success());
+    } catch (err) {
+      console.log(err);
+      dispatch(actions.viewerLogout.error({ message: err.message }));
+    }
+  };
+}
