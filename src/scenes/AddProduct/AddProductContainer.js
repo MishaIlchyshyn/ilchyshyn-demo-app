@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { compose, withHandlers } from "recompose";
 import { productsOperations } from "../../modules/products";
 import AddProductComponent from "./AddProductComponent";
+import { viewerOperations } from "../../modules/viewer";
 
 export const addProductValidate = {
   initialValues: {

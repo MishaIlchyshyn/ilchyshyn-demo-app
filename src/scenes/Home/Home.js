@@ -8,7 +8,7 @@ import { routes } from "../router";
 import SearchComponent from "../../components/Search/SearchComponent";
 import Footer from "../../components/Footer/Footer";
 
-const Home = ({ productsSearch, test }) => {
+const Home = ({ productsSearch }) => {
   const style = {
     background: "linear-gradient(180deg, #090810 0%, #171236 100%)",
     color: "#ffffff",
@@ -16,7 +16,7 @@ const Home = ({ productsSearch, test }) => {
 
   return (
     <div className={s.container}>
-      <Header logo="darkLogo" darkTheme={style} test={test}>
+      <Header logo="darkLogo" darkTheme={style}>
         <SearchComponent productsSearch={productsSearch} />
       </Header>
 

@@ -5,4 +5,3 @@ export const fetchUpdateUserAccount = createAsyncActions(
   "user/FETCH_UPDATE_USER_ACCOUNT"
 );
 export const fetchUploadImage = createAsyncActions("viewer/FETCH_UPLOAD_IMAGE");
-export const viewerLogout = createAsyncActions("viewer/VIEWER_LOGOUT");

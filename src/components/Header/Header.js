@@ -7,7 +7,7 @@ import { routes } from "../../scenes/router";
 import store from "../../store/createStore";
 import { Icon } from "../../Icon";
 
-const Header = ({ logo, darkTheme, children, test }) => {
+const Header = ({ logo, darkTheme, children }) => {
   const [style, setStyle] = useState({
     display: "none",
   });
@@ -34,7 +34,7 @@ const Header = ({ logo, darkTheme, children, test }) => {
   const logout = () => {
     Api.Auth.logout();
     history.push("/auth/login");
-    test();
+    store.getState().viewer.user = "";
   };
 
   const abbreviature = (userName) => {
